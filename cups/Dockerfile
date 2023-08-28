@@ -23,7 +23,12 @@ RUN apt-get update \
         nginx \
     && apt-get clean -y \
     && rm -rf /var/lib/apt/lists/*
+# Install drivers for brother dcpt300
+RUN wget https://download.brother.com/welcome/dlf101960/dcpt300lpr-3.0.2-0.i386.deb && \
+    dpkg -i --force-all dcpt300lpr-3.0.2-0.i386.deb
 
+RUN wget https://download.brother.com/welcome/dlf101961/dcpt300cupswrapper-3.0.2-0.i386.deb && \
+    dpkg -i --force-all dcpt300cupswrapper-3.0.2-0.i386.deb
 COPY rootfs /
 
 # Corrects permissions for s6 v3
