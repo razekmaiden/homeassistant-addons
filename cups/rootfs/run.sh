@@ -46,7 +46,13 @@ echo "$config" | tempio \
     -out /etc/avahi/avahi-daemon.conf
 
 mkdir -p /data/cups
+# Install drivers for brother dcpt300
+wget https://download.brother.com/welcome/dlf101960/dcpt300lpr-3.0.2-0.i386.deb
+dpkg -i --force-all dcpt300lpr-3.0.2-0.i386.deb
 
+wget https://download.brother.com/welcome/dlf101961/dcpt300cupswrapper-3.0.2-0.i386.deb
+dpkg -i --force-all dcpt300cupswrapper-3.0.2-0.i386.deb
+    
 # Start Avahi, wait for it to start up
 touch /var/run/avahi_configured
 until [ -e /var/run/avahi-daemon/socket ]; do
